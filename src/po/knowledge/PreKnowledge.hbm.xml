@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD
+3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="po.knowledge.PreKnowledge" table="dbo.PreKno" catalog="ACMplatform">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="increment" />
+        </id>
+
+        <many-to-one name="knowledge" class="po.knowledge.Knowledge" cascade="none" lazy="false">
+            <column name="Kno"/>
+        </many-to-one>
+
+        <many-to-one name="preKnow" class="po.knowledge.Knowledge" cascade="none" lazy="false">
+            <column name="preKno"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD
+3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="po.student.Student" table="dbo.Students"
+		catalog="ACMplatform">
+		<id name="id" type="java.lang.Integer">
+			<column name="StuID" />
+			<generator class="increment" />
+		</id>
+		<property name="name" type="java.lang.String">
+			<column name="StuName" length="20" />
+		</property>
+		<property name="account" type="java.lang.String">
+			<column name="StuAccount" length="20" />
+		</property>
+		<property name="password" type="java.lang.String">
+			<column name="StuPassWord" length="20" />
+		</property>
+		<property name="birthday" type="java.util.Date">
+			<column name="StuBirthday" length="20" />
+		</property>
+		<property name="sex" type="java.lang.Integer">
+			<column name="StuSex" />
+		</property>
+		<property name="email" type="java.lang.String">
+			<column name="StuEmail" length="20" />
+		</property>
+		<property name="phone" type="java.lang.String">
+			<column name="StuPhone" length="20" />
+		</property>
+		<property name="school" type="java.lang.String">
+			<column name="StuSchool" length="20" />
+		</property>
+		<property name="major" type="java.lang.String">
+			<column name="StuMajor" length="20" />
+		</property>
+		<property name="score" type="java.lang.Integer">
+			<column name="StuScore" />
+		</property>
+		<set catalog="ACMplatform" table="dbo.Articles" name="articles"
+			cascade="all-delete-orphan" inverse="true">
+			<key column="ArtID" />
+			<one-to-many class="po.article.Article" />
+		</set>
+	</class>
+</hibernate-mapping>
