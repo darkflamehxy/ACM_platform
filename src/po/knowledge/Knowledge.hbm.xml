@@ -1,21 +1,36 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD
 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="po.knowledge.Knowledge" table="dbo.Knoledges" catalog="ACMplatform">
+    <class name="po.knowledge.Knowledge" table="dbo.Knoledges" catalog="oj">
         <id name="id" type="java.lang.Integer">
-            <column name="KnoID" />
-            <generator class="increment" />
+            <column name="KnoID"/>
+            <generator class="increment"/>
         </id>
         <property name="name" type="java.lang.String">
             <column name="KnoName" length="20"/>
         </property>
         <property name="description" type="java.lang.String">
-            <column name="KnoDescription" length="500" />
+            <column name="KnoDescription" length="500"/>
         </property>
         <property name="level" type="java.lang.Integer">
             <column name="KnoLevel"/>
         </property>
+
+        <set name="articles" table="dbo.ArtKnos" catalog="oj" lazy="false" cascade="all-delete-orphan">
+            <key column="KnoID"/>
+            <many-to-many column="ArtID" class="po.article.Article"/>
+        </set>
+
+        <many-to-one name="preKno" class="po.knowledge.Knowledge" lazy="false">
+            <column name="KnoPre"/>
+        </many-to-one>
+
+        <set name="problems" table="dbo.ProKnos" catalog="oj" lazy="false" cascade="save-update">
+            <key column="KnoID"/>
+            <many-to-many column="ProID" class="po.problem.Problem"/>
+        </set>
+
     </class>
 </hibernate-mapping>

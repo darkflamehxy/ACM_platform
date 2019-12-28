@@ -9,6 +9,7 @@ public class KnowledgeDAO extends BaseHibernateDAO implements IKnowledgeDAO {
     @Override
     public void save(Knowledge knowledge) {
         getSession().save(knowledge);
+
     }
 
     @Override
