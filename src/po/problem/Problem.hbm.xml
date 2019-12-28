@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD
+3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="po.problem.Problem" table="dbo.Problems" catalog="oj">
+        <id name="id" type="java.lang.Integer">
+            <column name="ProID"/>
+            <generator class="increment"/>
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="ProName" length="20"/>
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="ProDescription" length="1000"/>
+        </property>
+        <property name="input" type="java.lang.String">
+            <column name="ProInput" length="200"/>
+        </property>
+        <property name="output" type="java.lang.String">
+            <column name="ProOutput" length="200"/>
+        </property>
+        <property name="sampleInput" type="java.lang.String">
+            <column name="ProSampleInput" length="200"/>
+        </property>
+        <property name="sampleOutput" type="java.lang.String">
+            <column name="ProSampleOutput" length="200"/>
+        </property>
+        <property name="level" type="java.lang.Integer">
+            <column name="ProLevel"/>
+        </property>
+        <property name="answer" type="java.lang.String">
+            <column name="ProAnswer" length="500"/>
+        </property>
+        <property name="proID" type="java.lang.String">
+            <column name="ProOJID" length="20"/>
+        </property>
+
+        <many-to-one name="onlineJudge" class="po.oj.OnlineJudge" cascade="none" lazy="false">
+            <column name="ProOJ"/>
+        </many-to-one>
+
+        <set name="knowledge" table="dbo.ProKnos" catalog="oj" cascade="none" lazy="false">
+            <key column="ProID"/>
+            <many-to-many column="KnoID" class="po.knowledge.Knowledge"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD
+3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="po.test.Test" table="dbo.Tests" catalog="oj">
+        <id name="id" type="java.lang.Integer">
+            <column name="TesID"/>
+            <generator class="increment"/>
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="TesName" length="20"/>
+        </property>
+        <property name="beginTime" type="java.util.Date">
+            <column name="TesBeginTime"/>
+        </property>
+        <property name="endTime" type="java.util.Date">
+            <column name="TesEndTime"/>
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="TesDescription" length="500"/>
+        </property>
+
+        <set name="problems" table="dbo.TesPros" catalog="oj" lazy="false" cascade="none">
+            <key column="TesID"/>
+            <many-to-many column="ProID" class="po.problem.Problem"/>
+        </set>
+        <many-to-one name="host" class="po.teacher.Teacher" cascade="none" lazy="false">
+            <column name="TesHost"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>
