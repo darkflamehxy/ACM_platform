@@ -25,6 +25,7 @@ public class ArticleDAO extends BaseHibernateDAO implements IArticleDAO{
 
     @Override
     public List query(String hql) {
+    	System.out.println(getSession().createQuery(hql).list().size());
         return getSession().createQuery(hql).list();
     }
 }

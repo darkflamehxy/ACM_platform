@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
+<%
+    String ctx = request.getContextPath();
+    pageContext.setAttribute("ctx", ctx);
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,14 +20,14 @@
 		  	
 			<div class="col-md-10">
 				<div class="content-box-large">
-					
+					<!-- write here ----------------------------------------------- -->
 				</div>
 			</div>
 			
 		</div>
 	</div>
 
-	<footer>
+	<footer class="navbar-fixed-bottom">
 	     <div class="container">
 			<div class="copy text-center">
 				ACM platform

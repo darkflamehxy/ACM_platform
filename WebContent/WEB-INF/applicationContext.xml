@@ -1,191 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="dataSource"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName"
-                  value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-        <property name="url"
-                  value="jdbc:sqlserver://127.0.0.1:1433;databaseName=oj"/>
-        <property name="username" value="sa"/>
-        <property name="password" value="666"/>
-    </bean>
-    <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">
-                    org.hibernate.dialect.SQLServerDialect
-                </prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.format_sql">true</prop>
-                <prop key="use_sql_comments">true</prop>
-            </props>
-        </property>
-        <property name="mappingResources">
-            <list>
-                <value>po/article/Article.hbm.xml</value>
-                <value>po/article/ArticleKnowledge.hbm.xml</value>
-                <value>po/student/Student.hbm.xml</value>
-                <value>po/teacher/Teacher.hbm.xml</value>
-                <value>po/knowledge/Knowledge.hbm.xml</value>
-                <value>po/oj/OnlineJudge.hbm.xml</value>
-                <value>po/oj/StuOJ.hbm.xml</value>
-                <value>po/problem/Problem.hbm.xml</value>
-                <value>po/problem/StuPro.hbm.xml</value>
-                <value>po/test/Test.hbm.xml</value>
-                <value>po/test/TestProblem.hbm.xml</value>
-            </list>
-        </property>
-    </bean>
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url"
+			value="jdbc:sqlserver://127.0.0.1:1433;databaseName=oj" />
+		<property name="username" value="sa" />
+		<property name="password" value="666" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="use_sql_comments">true</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>po/article/Article.hbm.xml</value>
+				<value>po/article/ArticleKnowledge.hbm.xml</value>
+				<value>po/student/Student.hbm.xml</value>
+				<value>po/teacher/Teacher.hbm.xml</value>
+				<value>po/knowledge/Knowledge.hbm.xml</value>
+				<value>po/oj/OnlineJudge.hbm.xml</value>
+				<value>po/oj/StuOJ.hbm.xml</value>
+				<value>po/problem/Problem.hbm.xml</value>
+				<value>po/problem/StuPro.hbm.xml</value>
+				<value>po/test/Test.hbm.xml</value>
+				<value>po/test/TestProblem.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
 
 
-    <!-- 配置事物管理器 -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
+	<!-- 配置事物管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
-    <!-- 定义增强处理拦截方法 -->
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="save" propagation="REQUIRED"/>
-            <tx:method name="update" propagation="REQUIRED"/>
-            <tx:method name="delete" propagation="REQUIRED"/>
-            <tx:method name="query" propagation="REQUIRED"/>
-            <tx:method name="*" read-only="true"/>
-        </tx:attributes>
-    </tx:advice>
+	<!-- 定义增强处理拦截方法 -->
+	<tx:advice id="txAdvice"
+		transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save" propagation="REQUIRED" />
+			<tx:method name="update" propagation="REQUIRED" />
+			<tx:method name="delete" propagation="REQUIRED" />
+			<tx:method name="query" propagation="REQUIRED" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
 
-    <aop:config>
-        <aop:pointcut id="allServiceMethod" expression="execution(* dao.*.*.*(..))"/>
+	<aop:config>
+		<aop:pointcut id="allServiceMethod"
+			expression="execution(* dao.*.*.*(..))" />
 
-        <aop:advisor pointcut-ref="allServiceMethod" advice-ref="txAdvice"/>
-    </aop:config>
-
-
-    <bean id="baseDAO" class="dao.BaseHibernateDAO">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-    <bean id="knowledgeDAO" class="dao.knowledge.KnowledgeDAO" parent="baseDAO"/>
-    <bean id="articleDAO" class="dao.article.ArticleDAO" parent="baseDAO"/>
-    <bean id="articleknoledgeDAO" class="dao.article.ArticleKnoledgeDAO" parent="baseDAO"/>
-    <bean id="studentDAO" class="dao.student.StudentDAO" parent="baseDAO"/>
-    <bean id="teacherDAO" class="dao.teacher.TeacherDAO" parent="baseDAO"/>
-    <bean id="onlineJudgeDAO" class="dao.oj.OnlineJudgeDAO" parent="baseDAO"/>
-    <bean id="problemDAO" class="dao.problem.ProblemDAO" parent="baseDAO"/>
-    <bean id="testDAO" class="dao.test.TestDAO" parent="baseDAO"/>
-    <bean id="testProblemDAO" class="dao.test.TestProblemDAO" parent="baseDAO"/>
-    <bean id="stuOJDAO" class="dao.oj.StuOJDAO" parent="baseDAO"/>
-    <bean id="stuProDAO" class="dao.problem.StuProDAO" parent="baseDAO"/>
+		<aop:advisor pointcut-ref="allServiceMethod"
+			advice-ref="txAdvice" />
+	</aop:config>
 
 
-    <!-- 测试用的po类bean -->
-    <bean name="simpleDateFormat" class="java.text.SimpleDateFormat">
-        <constructor-arg value="yyyy-MM-dd"/>
-    </bean>
-    <bean id="knowledge" class="po.knowledge.Knowledge" scope="prototype">
-        <property name="id" value="1"/>
-        <property name="name" value="dp"/>
-        <property name="description" value="dpdpdp"/>
-        <property name="level" value="1"/>
-    </bean>
-    <bean id="article" class="po.article.Article" scope="prototype">
-        <property name="id" value="1"/>
-        <property name="title" value="blog1"/>
-        <property name="content" value="bbbbbbbb"/>
-        <property name="description" value="blogblog"/>
-        <property name="type" value="233"/>
-        <property name="pic" value="23333333"/>
-        <property name="writer" ref="student"/>
-    </bean>
-    <bean id="student" class="po.student.Student" scope="prototype">
-        <property name="id" value="1"/>
-        <property name="name" value="zjut"/>
-        <property name="account" value="acm"/>
-        <property name="password" value="123"/>
-        <property name="birthday">
-            <bean factory-bean="simpleDateFormat" factory-method="parse">
-                <constructor-arg value="1998-05-21"/>
-            </bean>
-        </property>
-        <property name="phone" value="15812341234"/>
-        <property name="email" value="zzz@qq.com"/>
-        <property name="major" value="软件工程"/>
-        <property name="school" value="zjut"/>
-        <property name="score" value="100"/>
-        <property name="sex" value="1"/>
-    </bean>
-    <bean id="teacher" class="po.teacher.Teacher" scope="prototype">
-        <property name="id" value="1"/>
-        <property name="name" value="zjut"/>
-        <property name="account" value="acm"/>
-        <property name="password" value="123"/>
-        <property name="birthday">
-            <bean factory-bean="simpleDateFormat" factory-method="parse">
-                <constructor-arg value="1998-05-21"/>
-            </bean>
-        </property>
-        <property name="phone" value="15812341234"/>
-        <property name="email" value="zzz@qq.com"/>
-        <property name="school" value="zjut"/>
-        <property name="sex" value="1"/>
-    </bean>
-    <bean id="onlineJudge" class="po.oj.OnlineJudge" scope="prototype">
-        <property name="id" value="1"/>
-        <property name="name" value="hdu"/>
-        <property name="url" value="123"/>
-    </bean>
-    <bean id="problem" class="po.problem.Problem" scope="prototype">
-        <property name="id" value="1"/>
-        <property name="name" value="a+b"/>
-        <property name="level" value="1"/>
-        <property name="description" value="a+b"/>
-        <property name="answer" value="2"/>
-        <property name="input" value="1 1"/>
-        <property name="output" value="2"/>
-        <property name="sampleInput" value="1 1"/>
-        <property name="sampleOutput" value="2"/>
-        <property name="proID" value="1000"/>
-        <property name="onlineJudge" ref="onlineJudge"/>
-    </bean>
-    <bean id="test" class="po.test.Test" scope="prototype">
-        <property name="id" value="1"/>
-        <property name="name" value="1"/>
-        <property name="host" ref="teacher"/>
-        <property name="description" value="1"/>
-        <property name="beginTime">
-            <bean factory-bean="simpleDateFormat" factory-method="parse">
-                <constructor-arg value="1998-05-21"/>
-            </bean>
-        </property>
-        <property name="endTime">
-            <bean factory-bean="simpleDateFormat" factory-method="parse">
-                <constructor-arg value="1998-05-21"/>
-            </bean>
-        </property>
-    </bean>
-    <bean id="testProblem" class="po.test.TestProblem" scope="prototype">
-        <property name="id" value="1"/>
-        <property name="problem" ref="problem"/>
-        <property name="test" ref="test"/>
-    </bean>
-    <bean id="stuOJ" class="po.oj.StuOJ" scope="prototype">
-        <property name="id" value="1"/>
-        <property name="account" value="1"/>
-        <property name="password" value="1"/>
-        <property name="onlineJudge" ref="onlineJudge"/>
-        <property name="student" ref="student"/>
-    </bean>
-    <bean id="stuPro" class="po.problem.StuPro" scope="prototype">
-        <property name="id" value="1"/>
-        <property name="student" ref="student"/>
-        <property name="problem" ref="problem"/>
-    </bean>
+	<bean id="baseDAO" class="dao.BaseHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="knowledgeDAO" class="dao.knowledge.KnowledgeDAO"
+		parent="baseDAO" />
+	<bean id="articleDAO" class="dao.article.ArticleDAO"
+		parent="baseDAO" />
+	<bean id="articleknoledgeDAO"
+		class="dao.article.ArticleKnoledgeDAO" parent="baseDAO" />
+	<bean id="studentDAO" class="dao.student.StudentDAO"
+		parent="baseDAO" />
+	<bean id="teacherDAO" class="dao.teacher.TeacherDAO"
+		parent="baseDAO" />
+	<bean id="onlineJudgeDAO" class="dao.oj.OnlineJudgeDAO"
+		parent="baseDAO" />
+	<bean id="problemDAO" class="dao.problem.ProblemDAO"
+		parent="baseDAO" />
+	<bean id="testDAO" class="dao.test.TestDAO" parent="baseDAO" />
+	<bean id="testProblemDAO" class="dao.test.TestProblemDAO"
+		parent="baseDAO" />
+	<bean id="stuOJDAO" class="dao.oj.StuOJDAO" parent="baseDAO" />
+	<bean id="stuProDAO" class="dao.problem.StuProDAO"
+		parent="baseDAO" />
+
+	<bean class="service.article.ArticleService"
+		id="articleService">
+		<property ref="articleDAO" name="articleDao" />
+	</bean>
+	<bean scope="prototype" class="action.article.ArticleAction"
+		id="articleAction">
+		<property ref="articleService" name="articleService" />
+	</bean>
+	
+	
+	
+	
+	
+
+	<!-- 测试用的po类bean -->
+	<bean name="simpleDateFormat" class="java.text.SimpleDateFormat">
+		<constructor-arg value="yyyy-MM-dd" />
+	</bean>
+	<bean id="knowledge" class="po.knowledge.Knowledge"
+		scope="prototype">
+		<property name="id" value="1" />
+		<property name="name" value="dp" />
+		<property name="description" value="dpdpdp" />
+		<property name="level" value="1" />
+	</bean>
+	<bean id="article" class="po.article.Article" scope="prototype">
+		<property name="id" value="1" />
+		<property name="title" value="blog1" />
+		<property name="content" value="bbbbbbbb" />
+		<property name="description" value="blogblog" />
+		<property name="type" value="233" />
+		<property name="pic" value="23333333" />
+		<property name="writer" ref="student" />
+	</bean>
+	<bean id="student" class="po.student.Student" scope="prototype">
+		<property name="id" value="1" />
+		<property name="name" value="zjut" />
+		<property name="account" value="acm" />
+		<property name="password" value="123" />
+		<property name="birthday">
+			<bean factory-bean="simpleDateFormat" factory-method="parse">
+				<constructor-arg value="1998-05-21" />
+			</bean>
+		</property>
+		<property name="phone" value="15812341234" />
+		<property name="email" value="zzz@qq.com" />
+		<property name="major" value="软件工程" />
+		<property name="school" value="zjut" />
+		<property name="score" value="100" />
+		<property name="sex" value="1" />
+	</bean>
+	<bean id="teacher" class="po.teacher.Teacher" scope="prototype">
+		<property name="id" value="1" />
+		<property name="name" value="zjut" />
+		<property name="account" value="acm" />
+		<property name="password" value="123" />
+		<property name="birthday">
+			<bean factory-bean="simpleDateFormat" factory-method="parse">
+				<constructor-arg value="1998-05-21" />
+			</bean>
+		</property>
+		<property name="phone" value="15812341234" />
+		<property name="email" value="zzz@qq.com" />
+		<property name="school" value="zjut" />
+		<property name="sex" value="1" />
+	</bean>
+	<bean id="onlineJudge" class="po.oj.OnlineJudge" scope="prototype">
+		<property name="id" value="1" />
+		<property name="name" value="hdu" />
+		<property name="url" value="123" />
+	</bean>
+	<bean id="problem" class="po.problem.Problem" scope="prototype">
+		<property name="id" value="1" />
+		<property name="name" value="a+b" />
+		<property name="level" value="1" />
+		<property name="description" value="a+b" />
+		<property name="answer" value="2" />
+		<property name="input" value="1 1" />
+		<property name="output" value="2" />
+		<property name="sampleInput" value="1 1" />
+		<property name="sampleOutput" value="2" />
+		<property name="proID" value="1000" />
+		<property name="onlineJudge" ref="onlineJudge" />
+	</bean>
+	<bean id="test" class="po.test.Test" scope="prototype">
+		<property name="id" value="1" />
+		<property name="name" value="1" />
+		<property name="host" ref="teacher" />
+		<property name="description" value="1" />
+		<property name="beginTime">
+			<bean factory-bean="simpleDateFormat" factory-method="parse">
+				<constructor-arg value="1998-05-21" />
+			</bean>
+		</property>
+		<property name="endTime">
+			<bean factory-bean="simpleDateFormat" factory-method="parse">
+				<constructor-arg value="1998-05-21" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="testProblem" class="po.test.TestProblem"
+		scope="prototype">
+		<property name="id" value="1" />
+		<property name="problem" ref="problem" />
+		<property name="test" ref="test" />
+	</bean>
+	<bean id="stuOJ" class="po.oj.StuOJ" scope="prototype">
+		<property name="id" value="1" />
+		<property name="account" value="1" />
+		<property name="password" value="1" />
+		<property name="onlineJudge" ref="onlineJudge" />
+		<property name="student" ref="student" />
+	</bean>
+	<bean id="stuPro" class="po.problem.StuPro" scope="prototype">
+		<property name="id" value="1" />
+		<property name="student" ref="student" />
+		<property name="problem" ref="problem" />
+	</bean>
 
 
 </beans>
