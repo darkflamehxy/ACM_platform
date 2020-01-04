@@ -19,7 +19,7 @@ public class StudentDAOTest {
 
     @Before
     public void setUp() throws Exception {
-        ApplicationContext context = new FileSystemXmlApplicationContext("web/WEB-INF/applicationContext.xml");
+        ApplicationContext context = new FileSystemXmlApplicationContext("WebContent/WEB-INF/applicationContext.xml");
         student = (Student) context.getBean("student");
         dao = (IStudentDAO) context.getBean("studentDAO");
     }
