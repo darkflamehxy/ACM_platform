@@ -15,5 +15,9 @@ Configuration 2.1//EN"
 			<result name="edit">ArticleEdit.jsp</result>
 			<result name="detail">ArticleDetail.jsp</result>
 		</action>
+		<action name="problem_*" class="problemAction" method="{1}">
+			<result name="all">ProblemAll.jsp</result>
+			<result name="detail">ProblemDetail.jsp</result>
+		</action>
 	</package>
 </struts>

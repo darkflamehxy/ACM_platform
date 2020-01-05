@@ -19,13 +19,12 @@ public class ProblemService implements IProblemService {
 
 	}
 
-	public void SelectOne(Problem b) {
-		String hql = "from Problems where id = " + b.getId();
-		List<Problem> aList = (List<Problem>) problemDao.query(hql);
-		Problem bb = aList.get(0);
+	public void SelectOne(Problem p) {
+		String hql = "from Problems where id = " + p.getId();
+		List<Problem> pList = (List<Problem>) problemDao.query(hql);
+		Problem pp = pList.get(0);
 		ActionContext ctx = ActionContext.getContext();
-		ctx.getSession().put("problem_one_s", bb);
-
+		ctx.getSession().put("problem_one_s", pp);
 	}
 
 	public IProblemDAO getProblemDao() {
