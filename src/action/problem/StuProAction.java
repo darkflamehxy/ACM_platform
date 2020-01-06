@@ -9,7 +9,27 @@ public class StuProAction {
 	private StuPro stupro;
 	private Student student;
 	private Problem problem;
-	private IStuProService stuproservice = null;
+	private IStuProService stuproService = null;
+
+	public String all() {
+		stuproService.SelectAll();
+		return "all";
+	}
+
+	public String detail() {
+		stuproService.SelectOne(stupro);
+		return "detail";
+	}
+
+	public String acpro() {
+		stuproService.SelectACPro(stupro);
+		return "acpro";
+	}
+
+	public String acstu() {
+		stuproService.SelectACStu(stupro);
+		return "acstu";
+	}
 
 	public StuPro getStupro() {
 		return stupro;
@@ -20,11 +40,11 @@ public class StuProAction {
 	}
 
 	public IStuProService getStuproservice() {
-		return stuproservice;
+		return stuproService;
 	}
 
 	public void setStuproservice(IStuProService stuproservice) {
-		this.stuproservice = stuproservice;
+		this.stuproService = stuproservice;
 	}
 
 	public Problem getProblem() {
@@ -43,23 +63,4 @@ public class StuProAction {
 		this.student = student;
 	}
 
-	public String all() {
-		stuproservice.SelectAll();
-		return "all";
-	}
-
-	public String detail() {
-		stuproservice.SelectOne(stupro);
-		return "detail";
-	}
-
-	public String byStu() {
-		stuproservice.SelectByStu(student);
-		return "byStu";
-	}
-
-	public String byPro() {
-		stuproservice.SelectByPro(problem);
-		return "byPro";
-	}
 }

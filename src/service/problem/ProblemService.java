@@ -20,6 +20,7 @@ public class ProblemService implements IProblemService {
 	}
 
 	public void SelectOne(Problem p) {
+		System.out.println(p.getId());
 		String hql = "from Problem where id = " + p.getId();
 		List<Problem> pList = (List<Problem>) problemDao.query(hql);
 		Problem pp = pList.get(0);
@@ -33,6 +34,33 @@ public class ProblemService implements IProblemService {
 
 	public void setProblemDao(IProblemDAO problemDao) {
 		this.problemDao = problemDao;
+	}
+
+	public void save(Problem p) {
+		problemDao.save(p);
+		String hql = "from Problem";
+		List<Problem> aList = (List<Problem>) problemDao.query(hql);
+		System.out.println(aList.size());
+		ActionContext ctx = ActionContext.getContext();
+		ctx.getSession().put("problem_all_s", aList);
+	}
+
+	public void delete(Problem p) {
+		problemDao.delete(p);
+		String hql = "from Problem";
+		List<Problem> aList = (List<Problem>) problemDao.query(hql);
+		System.out.println(aList.size());
+		ActionContext ctx = ActionContext.getContext();
+		ctx.getSession().put("problem_all_s", aList);
+	}
+
+	public void update(Problem p) {
+		problemDao.update(p);
+		String hql = "from Problem";
+		List<Problem> aList = (List<Problem>) problemDao.query(hql);
+		System.out.println(aList.size());
+		ActionContext ctx = ActionContext.getContext();
+		ctx.getSession().put("problem_all_s", aList);
 	}
 
 }

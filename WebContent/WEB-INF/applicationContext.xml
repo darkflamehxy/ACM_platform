@@ -109,117 +109,15 @@
 	<bean class="service.problem.ProblemService" id="problemService">
 		<property ref="problemDAO" name="problemDao" />
 	</bean>
-	
 	<bean scope="prototype" class="action.problem.ProblemAction" id="problemAction">
 		<property ref="problemService" name="problemService" />
 	</bean>
 	
-	
-
-	<!-- 测试用的po类bean -->
-	<bean name="simpleDateFormat" class="java.text.SimpleDateFormat">
-		<constructor-arg value="yyyy-MM-dd" />
+	<bean class="service.problem.StuProService" id="stuproService">
+		<property ref="stuProDAO" name="stuproDao" />
 	</bean>
-	<bean id="knowledge" class="po.knowledge.Knowledge"
-		scope="prototype">
-		<property name="id" value="1" />
-		<property name="name" value="dp" />
-		<property name="description" value="dpdpdp" />
-		<property name="level" value="1" />
+	<bean scope="prototype" class="action.problem.StuProAction" id="stuproAction">
+		<property ref="stuproService" name="stuproservice" />
 	</bean>
-	<bean id="article" class="po.article.Article" scope="prototype">
-		<property name="id" value="1" />
-		<property name="title" value="blog1" />
-		<property name="content" value="bbbbbbbb" />
-		<property name="description" value="blogblog" />
-		<property name="type" value="233" />
-		<property name="pic" value="23333333" />
-		<property name="writer" ref="student" />
-	</bean>
-	<bean id="student" class="po.student.Student" scope="prototype">
-		<property name="id" value="1" />
-		<property name="name" value="zjut" />
-		<property name="account" value="acm" />
-		<property name="password" value="123" />
-		<property name="birthday">
-			<bean factory-bean="simpleDateFormat" factory-method="parse">
-				<constructor-arg value="1998-05-21" />
-			</bean>
-		</property>
-		<property name="phone" value="15812341234" />
-		<property name="email" value="zzz@qq.com" />
-		<property name="major" value="软件工程" />
-		<property name="school" value="zjut" />
-		<property name="score" value="100" />
-		<property name="sex" value="1" />
-	</bean>
-	<bean id="teacher" class="po.teacher.Teacher" scope="prototype">
-		<property name="id" value="1" />
-		<property name="name" value="zjut" />
-		<property name="account" value="acm" />
-		<property name="password" value="123" />
-		<property name="birthday">
-			<bean factory-bean="simpleDateFormat" factory-method="parse">
-				<constructor-arg value="1998-05-21" />
-			</bean>
-		</property>
-		<property name="phone" value="15812341234" />
-		<property name="email" value="zzz@qq.com" />
-		<property name="school" value="zjut" />
-		<property name="sex" value="1" />
-	</bean>
-	<bean id="onlineJudge" class="po.oj.OnlineJudge" scope="prototype">
-		<property name="id" value="1" />
-		<property name="name" value="hdu" />
-		<property name="url" value="123" />
-	</bean>
-	<bean id="problem" class="po.problem.Problem" scope="prototype">
-		<property name="id" value="1" />
-		<property name="name" value="a+b" />
-		<property name="level" value="1" />
-		<property name="description" value="a+b" />
-		<property name="answer" value="2" />
-		<property name="input" value="1 1" />
-		<property name="output" value="2" />
-		<property name="sampleInput" value="1 1" />
-		<property name="sampleOutput" value="2" />
-		<property name="proID" value="1000" />
-		<property name="onlineJudge" ref="onlineJudge" />
-	</bean>
-	<bean id="test" class="po.test.Test" scope="prototype">
-		<property name="id" value="1" />
-		<property name="name" value="1" />
-		<property name="host" ref="teacher" />
-		<property name="description" value="1" />
-		<property name="beginTime">
-			<bean factory-bean="simpleDateFormat" factory-method="parse">
-				<constructor-arg value="1998-05-21" />
-			</bean>
-		</property>
-		<property name="endTime">
-			<bean factory-bean="simpleDateFormat" factory-method="parse">
-				<constructor-arg value="1998-05-21" />
-			</bean>
-		</property>
-	</bean>
-	<bean id="testProblem" class="po.test.TestProblem"
-		scope="prototype">
-		<property name="id" value="1" />
-		<property name="problem" ref="problem" />
-		<property name="test" ref="test" />
-	</bean>
-	<bean id="stuOJ" class="po.oj.StuOJ" scope="prototype">
-		<property name="id" value="1" />
-		<property name="account" value="1" />
-		<property name="password" value="1" />
-		<property name="onlineJudge" ref="onlineJudge" />
-		<property name="student" ref="student" />
-	</bean>
-	<bean id="stuPro" class="po.problem.StuPro" scope="prototype">
-		<property name="id" value="1" />
-		<property name="student" ref="student" />
-		<property name="problem" ref="problem" />
-	</bean>
-
 
 </beans>

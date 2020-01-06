@@ -1,15 +1,15 @@
 package service.problem;
 
-import po.problem.Problem;
 import po.problem.StuPro;
-import po.student.Student;
 
 public interface IStuProService {
+	public void save(StuPro sp);
+
 	public void SelectAll();
 
-	public void SelectByStu(Student s);
+	public void SelectACPro(StuPro sp);
 
-	public void SelectByPro(Problem p);
+	public void SelectACStu(StuPro sp);
 
 	public void SelectOne(StuPro sp);
 }

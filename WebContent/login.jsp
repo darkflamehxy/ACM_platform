@@ -32,7 +32,9 @@
     <![endif]-->
   </head>
   <body class="login-bg">
-  <a href="problem_all.action">查看所有题目</a>
+  <a href="problem_teaall.action">教师查看所有题目</a>
+  <a href="problem_stuall.action">学生查看所有题目</a>
+  <a href="ProblemAdd.jsp">添加题目</a>
   	<div class="header">
 	     <div class="container">
 	        <div class="row">

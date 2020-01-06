@@ -15,15 +15,17 @@ Configuration 2.1//EN"
 			<result name="edit">ArticleEdit.jsp</result>
 			<result name="detail">ArticleDetail.jsp</result>
 		</action>
-		<action name="problem_*" class="problemAction" method="all">
-			<result name="all">ProblemAll.jsp</result>
-			<result name="detail">ProblemDetail.jsp</result>
+		<action name="problem_*" class="problemAction" method="{1}">
+			<result name="stuall">StuProblemAll.jsp</result>
+			<result name="teaall">TeaProblemAll.jsp</result>
+			<result name="teacontest">TeaContest.jsp</result>
+			<result name="stucontest">Stucontest.jsp</result>
+			<result name="studetail">StuProblemDetail.jsp</result>
+			<result name="teadetail">TeaProblemDetail.jsp</result>
 		</action>
 		<action name="stupro_*" class="stuproAction" method="{1}">
-			<result name="all">ProblemAll.jsp</result>
-			<result name="byStu">ProblemAll.jsp</result>
-			<result name="byPro">ProblemAll.jsp</result>
-			<result name="detail">ProblemDetail.jsp</result>
+			<result name="acstu">ACStu.jsp</result>
+			<result name="acpro">ACPro.jsp</result>
 		</action>
 	</package>
 </struts>
