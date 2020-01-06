@@ -13,7 +13,7 @@
 		<property name="url"
 			value="jdbc:sqlserver://127.0.0.1:1433;databaseName=oj" />
 		<property name="username" value="sa" />
-		<property name="password" value="666" />
+		<property name="password" value="123456" />
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -106,8 +106,13 @@
 		<property ref="articleService" name="articleService" />
 	</bean>
 	
+	<bean class="service.problem.ProblemService" id="problemService">
+		<property ref="problemDAO" name="problemDao" />
+	</bean>
 	
-	
+	<bean scope="prototype" class="action.problem.ProblemAction" id="problemAction">
+		<property ref="problemService" name="problemService" />
+	</bean>
 	
 	
 

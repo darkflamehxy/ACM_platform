@@ -11,7 +11,7 @@ public class ProblemService implements IProblemService {
 	private IProblemDAO problemDao = null;
 
 	public void SelectAll() {
-		String hql = "from Problems";
+		String hql = "from Problem";
 		List<Problem> aList = (List<Problem>) problemDao.query(hql);
 		System.out.println(aList.size());
 		ActionContext ctx = ActionContext.getContext();
@@ -20,7 +20,7 @@ public class ProblemService implements IProblemService {
 	}
 
 	public void SelectOne(Problem p) {
-		String hql = "from Problems where id = " + p.getId();
+		String hql = "from Problem where id = " + p.getId();
 		List<Problem> pList = (List<Problem>) problemDao.query(hql);
 		Problem pp = pList.get(0);
 		ActionContext ctx = ActionContext.getContext();

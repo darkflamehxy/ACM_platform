@@ -32,6 +32,7 @@
     <![endif]-->
   </head>
   <body class="login-bg">
+  <a href="problem_all.action">查看所有题目</a>
   	<div class="header">
 	     <div class="container">
 	        <div class="row">
