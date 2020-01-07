@@ -20,38 +20,24 @@
 		  	
 			<div class="col-md-10">
 				<div class="content-box-large">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>题目编号</th>
-								<th>题目名</th>
-								<th>描述</th>
-								<th>难度</th>
-								<th>答案</th>
-								<th>知识点</th>
-								<th>编辑题目</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<s:iterator var="p" value="#session.problem_all_s">
-								<tr>
-									<td><s:property value="#p.id" /></td>
-									<td><s:property value="#p.name" /></td>
-									<td><s:property value="#p.description" /></td>
-									<td><s:property value="#p.level" /></td>
-									<td><s:property value="#p.answer" /></td>
-									<td>
-										<s:iterator var="k" value="#p.knowledge">
-											<s:property value="#k.name"/>&nbsp; 
-										</s:iterator>
-									</td>
-									<td><a href="${ctx}/problem_teadetail.action?problem.id=<s:property value="#p.id"/>">题目链接</a></td>
-									<td><a href="${ctx}/stupro_acstu.action?stupro.problem.id=<s:property value="#p.id"/>">ac同学</a></td>
-								</tr>
-							</s:iterator>
-						</tbody>
-					</table>
+					<form action="${ctx}/problem_addKno.action?problem.id=<s:property value="#session.problem_one_s.id"/>"
+					method="post">
+						<table class="table table-striped">
+							<div>
+		  						<h4>选择知识点</h4>
+		  						<p>
+		  							<select class="selectpicker" name="knowledge.id">
+		  								<s:iterator var="k" value="#session.knowledge_not_in_s">
+		  									<option value="<s:property value="#k.id" />"><s:property value="#k.name" /></option>
+		  								</s:iterator>
+									</select>
+		  						</p>
+		  					</div>
+						</table>
+						<div class="action" style="text-align:right;">
+					      	<button type="submit" class="btn btn-primary">添加知识点</button>			              		  		
+					  	</div>
+					</form>
 				</div>
 			</div>
 		</div>

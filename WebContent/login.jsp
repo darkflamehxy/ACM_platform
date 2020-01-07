@@ -9,7 +9,7 @@
     <s:head theme="xhtml"/>
 	<sx:head parseContent="true" extraLocales="UTF-8"/> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
+    <!-- jQuery UI -->
     <link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet" media="screen">
 
     <!-- Bootstrap -->
@@ -32,9 +32,6 @@
     <![endif]-->
   </head>
   <body class="login-bg">
-  <a href="problem_teaall.action">教师查看所有题目</a>
-  <a href="problem_stuall.action">学生查看所有题目</a>
-  <a href="ProblemAdd.jsp">添加题目</a>
   	<div class="header">
 	     <div class="container">
 	        <div class="row">
@@ -48,44 +45,140 @@
 	     </div>
 	</div>
 
-	<div class="page-content container">
-		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
-				<div class="login-wrapper">
-			        <div class="box">
-			            <div class="content-wrap">
-			                <h6>Sign In</h6>
-							<form action="login" method="post" namespace="/">
-								<input class="form-control" type="text" placeholder="Account" name="account">
-				                <input class="form-control" type="password" placeholder="Password" name="password">
-				                <select class="form-control input-md">
-									<option value="Student">Student</option>
-									<option value="Teacher">Teacher</option>
-									<option value="Admin">Admin</option>
-								</select>
-				                <div class="action">
-				                    <button type="submit" class="btn btn-primary">submit</button>
-				                    <button type="reset" class="btn btn-primary">reset</button>
-				                </div>
-							</form>
-			            </div>
-			        </div>
-
-			        <div class="already">
-			            <p>Don't have an account yet?</p>
-			            <a href="register.jsp">Sign Up</a>
-			        </div>
-			    </div>
-			</div>
-		</div>
+	<div class="page-content container">		
+			<div class="row">
+					<div class="col-md-4 col-md-offset-4">
+						<div class="content-box-large">
+		  				<div class="panel-heading">
+							<div class="panel-title">登录页面</div>
+						</div>
+		  				<div class="panel-body">
+		  					<div id="rootwizard">
+								<div class="navbar">
+								  <div class="navbar-inner">
+								    <div class="container">
+								<ul class="nav nav-pills">
+								  	<li class="active"><a href="#tab1" data-toggle="tab">学生</a></li>
+									<li><a href="#tab2" data-toggle="tab">教师</a></li>
+									<li><a href="#tab3" data-toggle="tab">管理员</a></li>
+								</ul>
+								 </div>
+								  </div>
+								</div>
+								<div class="tab-content">
+								    <div class="tab-pane active" id="tab1">
+								      <form class="form-horizontal" role="form"
+								      	action="stulogin" method="post" namespace="/">
+										  <div class="form-group">										    
+										    <div class="col-sm-10">
+										      <input class="form-control" type="text" placeholder="学号" name="loginUser.account">
+										    </div>
+										  </div>
+										  <div class="form-group">
+										    <div class="col-sm-10">
+										      <input class="form-control" type="password" placeholder="密码" name="loginUser.password">
+										    </div>
+										  </div>
+										  <div class="form-group">
+											  <div style="margin:0 auto;width:150px;"> 
+											  	<div class="action">
+								                  	<button type="submit" class="btn btn-primary">登录</button>
+								                  	<button type="reset" class="btn btn-primary">重置</button>
+					                		  	</div> 
+											  </div>								                             
+								          </div>										  
+										</form>
+								    </div>
+								    <div class="tab-pane" id="tab2">
+								      <form class="form-horizontal" role="form"
+								      	action="tealogin" method="post" namespace="/">
+										  <div class="form-group">										    
+										    <div class="col-sm-10">
+										      <input class="form-control" type="text" placeholder="教师号" name="loginUser.account">
+										    </div>
+										  </div>
+										  <div class="form-group">
+										    <div class="col-sm-10">
+										      <input class="form-control" type="password" placeholder="密码" name="loginUser.password">
+										    </div>
+										  </div>
+										  <div class="form-group">
+											  <div style="margin:0 auto;width:150px;"> 
+											  	<div class="action">
+								                  	<button type="submit" class="btn btn-primary">登录</button>
+								                  	<button type="reset" class="btn btn-primary">重置</button>
+					                		  	</div> 
+											  </div>								                             
+								          </div>										  										  
+										</form>
+			            			</div>
+									<div class="tab-pane" id="tab3">
+										<form class="form-horizontal" role="form"
+											action="adminlogin" method="post" namespace="/">
+										  <div class="form-group">										    
+										    <div class="col-sm-10">
+										      <input class="form-control" type="text" placeholder="管理员号" name="loginUser.account">
+										    </div>
+										  </div>
+										  <div class="form-group">
+										    <div class="col-sm-10">
+										      <input class="form-control" type="password" placeholder="密码" name="loginUser.password">
+										    </div>
+										  </div>
+										  <div class="form-group">
+											  <div style="margin:0 auto;width:150px;"> 
+											  	<div class="action">
+								                  	<button type="submit" class="btn btn-primary">登录</button>
+								                  	<button type="reset" class="btn btn-primary">重置</button>
+					                		  	</div> 
+											  </div>								                             
+								          </div>										  
+										</form>
+								    </div>								    
+								</div>	
+							</div>
+		  				</div>
+		  			</div>
+			  		<div class="already">
+			  			<div style="margin:0 auto;width:100px;">
+							没有账号?<a href="register.jsp">注册</a>
+						</div>
+					</div>
+				</div>				
+		</div>		
 	</div>
+	
+	
 
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="vendors/form-helpers/js/bootstrap-formhelpers.min.js"></script>
+
+    <script src="vendors/select/bootstrap-select.min.js"></script>
+
+    <script src="vendors/tags/js/bootstrap-tags.min.js"></script>
+
+    <script src="vendors/mask/jquery.maskedinput.min.js"></script>
+
+    <script src="vendors/moment/moment.min.js"></script>
+
+    <script src="vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
+
+	<!-- bootstrap-datetimepicker -->
+     <link href="vendors/bootstrap-datetimepicker/datetimepicker.css" rel="stylesheet">
+     <script src="vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script> 
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    
     <script src="js/custom.js"></script>
+    <script src="js/forms.js"></script>
   </body>
 </html>

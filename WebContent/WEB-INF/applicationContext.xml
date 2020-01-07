@@ -108,9 +108,11 @@
 	
 	<bean class="service.problem.ProblemService" id="problemService">
 		<property ref="problemDAO" name="problemDao" />
+		<property ref="knowledgeDAO" name="knowledgeDao" />
 	</bean>
 	<bean scope="prototype" class="action.problem.ProblemAction" id="problemAction">
 		<property ref="problemService" name="problemService" />
+		<property ref="knowledgeService" name="knowledgeService" />
 	</bean>
 	
 	<bean class="service.problem.StuProService" id="stuproService">
@@ -118,6 +120,21 @@
 	</bean>
 	<bean scope="prototype" class="action.problem.StuProAction" id="stuproAction">
 		<property ref="stuproService" name="stuproservice" />
+	</bean>
+
+	<bean class="service.student.StudentService" id="studentService">
+		<property ref="studentDAO" name="studentDAO" />
+	</bean>
+	<bean scope="prototype" class="action.student.StudentAction" id="studentAction">
+		<property ref="studentService" name="studentService" />
+	</bean>
+	
+	<bean class="service.knowledge.KnowledgeService" id="knowledgeService">
+		<property ref="knowledgeDAO" name="knowledgeDao" />
+		<property ref="problemDAO" name="problemDao" />
+	</bean>
+	<bean scope="prototype" class="action.knowledge.KnowledgeAction" id="knowledgeAction">
+		<property ref="knowledgeService" name="knowledgeService" />
 	</bean>
 
 </beans>

@@ -18,7 +18,7 @@
             <column name="KnoLevel"/>
         </property>
 
-        <set name="articles" table="dbo.ArtKnos" catalog="oj" lazy="false" cascade="all-delete-orphan">
+        <set name="articles" table="dbo.ArtKnos" inverse="true" catalog="oj" lazy="false" cascade="all-delete-orphan">
             <key column="KnoID"/>
             <many-to-many column="ArtID" class="po.article.Article"/>
         </set>
@@ -27,7 +27,7 @@
             <column name="KnoPre"/>
         </many-to-one>
 
-        <set name="problems" table="dbo.ProKnos" catalog="oj" lazy="false" cascade="save-update">
+        <set name="problems" table="dbo.ProKnos" inverse="true" catalog="oj" lazy="false" cascade="save-update">
             <key column="KnoID"/>
             <many-to-many column="ProID" class="po.problem.Problem"/>
         </set>

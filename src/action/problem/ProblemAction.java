@@ -1,13 +1,17 @@
 package action.problem;
 
+import po.knowledge.Knowledge;
 import po.problem.Problem;
 import po.student.Student;
+import service.knowledge.IKnowledgeService;
 import service.problem.IProblemService;
 
 public class ProblemAction {
 	private Student student;
 	private Problem problem;
+	private Knowledge knowledge;
 	private IProblemService problemService = null;
+	private IKnowledgeService knowledgeService = null;
 
 	public String save() {
 		problemService.save(problem);
@@ -20,7 +24,6 @@ public class ProblemAction {
 	}
 
 	public String delete() {
-		System.out.println("action删除action删除action删除action删除action删除action删除action删除action删除");
 		problemService.delete(problem);
 		return "teaall";
 	}
@@ -52,7 +55,19 @@ public class ProblemAction {
 
 	public String teadetail() {
 		problemService.SelectOne(problem);
+		knowledgeService.SelectNotIn(problem);
 		return "teadetail";
+	}
+
+	public String preparekno() {
+		problemService.SelectOne(problem);
+		problemService.SelectAll();
+		return "knoready";
+	}
+
+	public String addKno() {
+		problemService.addKno(problem, knowledge);
+		return "knoadd";
 	}
 
 	public Student getStudent() {
@@ -78,4 +93,21 @@ public class ProblemAction {
 	public void setProblemService(IProblemService problemService) {
 		this.problemService = problemService;
 	}
+
+	public IKnowledgeService getKnowledgeService() {
+		return knowledgeService;
+	}
+
+	public void setKnowledgeService(IKnowledgeService knowledgeService) {
+		this.knowledgeService = knowledgeService;
+	}
+
+	public Knowledge getKnowledge() {
+		return knowledge;
+	}
+
+	public void setKnowledge(Knowledge knowledge) {
+		this.knowledge = knowledge;
+	}
+
 }

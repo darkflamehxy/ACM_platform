@@ -23,7 +23,7 @@ public class StuProService implements IStuProService {
 	}
 
 	public void SelectACPro(StuPro sp) {
-		String hql = "from StuPro where problem.id = " + sp.getProblem().getId();
+		String hql = "from StuPro where student.id = " + sp.getStudent().getId();
 		List<StuPro> spList = (List<StuPro>) stuproDao.query(hql);
 		List<Problem> pList = new ArrayList<Problem>();
 		for (StuPro sp1 : spList) {
@@ -36,7 +36,7 @@ public class StuProService implements IStuProService {
 	}
 
 	public void SelectACStu(StuPro sp) {
-		String hql = "from StuPro where student.id = " + sp.getProblem().getId();
+		String hql = "from StuPro where problem.id = " + sp.getProblem().getId();
 		List<StuPro> spList = (List<StuPro>) stuproDao.query(hql);
 		List<Student> sList = new ArrayList<Student>();
 		for (StuPro sp1 : spList) {

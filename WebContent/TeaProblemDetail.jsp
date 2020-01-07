@@ -92,12 +92,28 @@
 						        name="problem.answer">
 						    </div>
 						</div>
+						<input type="hidden" name="problem.knowledge.makeNew[0].id" value="1"/>
+						<input type="hidden" name="problem.knowledge.makeNew[1].id" value="2"/>
+						<div class="form-group">
+						    <label class="col-sm-2 control-label">知识点</label>
+						    <div class="col-sm-10">						    	
+						        <span class="form-control">
+						        	<s:iterator var="k" value="#session.problem_one_s.knowledge">
+										<s:property value="#k.name"/>&nbsp;
+									</s:iterator>
+						        </span>
+						    </div>
+						</div>
 						<div class="action" style="text-align:right;">
 					      	<button type="submit" class="btn btn-primary">修改题目</button>			              		  		
 					  	</div>
 					</form>
 					<div style="text-align:right;">
+						<br>
+						<a href="${ctx}/problem_preparekno.action?problem.id=<s:property value="#session.problem_one_s.id"/>"><button class="btn btn-primary">为题目添加知识点</button></a>
+						&nbsp;&nbsp;
 						<a href="${ctx}/problem_teadetail.action?problem.id=<s:property value="#session.problem_one_s.id"/>"><button class="btn btn-primary">重置</button></a>
+						&nbsp;&nbsp;
 						<a href="${ctx}/problem_delete.action?problem.id=<s:property value="#session.problem_one_s.id"/>"><button class="btn btn-primary">删除</button></a>
 					</div>
 				</div>

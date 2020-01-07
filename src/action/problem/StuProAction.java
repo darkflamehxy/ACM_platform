@@ -11,6 +11,11 @@ public class StuProAction {
 	private Problem problem;
 	private IStuProService stuproService = null;
 
+	public String save() {
+		stuproService.save(stupro);
+		return "ok";
+	}
+
 	public String all() {
 		stuproService.SelectAll();
 		return "all";

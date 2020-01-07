@@ -20,7 +20,9 @@
 		  	
 			<div class="col-md-10">
 				<div class="content-box-large">
-					<!-- write here ----------------------------------------------- -->
+					 <a href="problem_teaall.action">教师查看所有题目</a>
+  					 <a href="problem_stuall.action">学生查看所有题目</a>
+  					 <a href="ProblemAdd.jsp">添加题目</a>
 				</div>
 			</div>
 			

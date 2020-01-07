@@ -5,6 +5,10 @@ Configuration 2.1//EN"
 <struts>
 	<package name="strutsBean" extends="struts-default"
 		namespace="/">
+		<action name="stulogin" class="studentAction" method="stuLogin">
+			<result name="success">/StudentWelcome.jsp</result>
+			<result name="fail">/login.jsp</result>
+		</action>
 		<action name="register" class="userAction">
 			<result name="success">/registerSuccess.jsp</result>
 			<result name="fail">/registerFail.jsp</result>
@@ -16,6 +20,8 @@ Configuration 2.1//EN"
 			<result name="detail">ArticleDetail.jsp</result>
 		</action>
 		<action name="problem_*" class="problemAction" method="{1}">
+			<result name="knoready">AddKnoToPro.jsp</result>
+			<result name="knoadd">TeaProblemAll.jsp</result>
 			<result name="stuall">StuProblemAll.jsp</result>
 			<result name="teaall">TeaProblemAll.jsp</result>
 			<result name="teacontest">TeaContest.jsp</result>
@@ -26,6 +32,7 @@ Configuration 2.1//EN"
 		<action name="stupro_*" class="stuproAction" method="{1}">
 			<result name="acstu">ACStu.jsp</result>
 			<result name="acpro">ACPro.jsp</result>
+			<result name="ok">StuProblemAll.jsp</result>
 		</action>
 	</package>
 </struts>

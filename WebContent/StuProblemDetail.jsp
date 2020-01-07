@@ -22,9 +22,7 @@
 				<div class="content-box-large">
 					<form class="form-horizontal" role="form" 
 					action="stupro_save.action?
-					problem.id=<s:property value="#session.problem.id"/>
-					&&
-					student.id=<s:property value="#session.student.id"/>" 
+					stupro.problem.id=<s:property value="#session.problem_one_s.id"/>&stupro.student.id=<s:property value="#session.student_s.id"/>" 
 					method="post">
 					  	<div class="form-group">
 						    <label class="col-sm-2 control-label">题目编号</label>
@@ -78,6 +76,16 @@
 						    <label class="col-sm-2 control-label">答案</label>
 						    <div class="col-sm-10">						    	
 						        <span class="form-control"><s:property value="#session.problem_one_s.answer" /></span>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label class="col-sm-2 control-label">知识点</label>
+						    <div class="col-sm-10">						    	
+						        <span class="form-control">
+						        	<s:iterator var="k" value="#session.problem_one_s.knowledge">
+										<s:property value="#k.name"/>  
+									</s:iterator>
+						        </span>
 						    </div>
 						</div>
 						<div class="action" style="text-align:right;">

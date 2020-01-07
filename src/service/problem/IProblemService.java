@@ -1,5 +1,6 @@
 package service.problem;
 
+import po.knowledge.Knowledge;
 import po.problem.Problem;
 
 public interface IProblemService {
@@ -12,5 +13,7 @@ public interface IProblemService {
 	public void SelectAll();
 
 	public void SelectOne(Problem p);
+
+	public void addKno(Problem problem, Knowledge knowledge);
 
 }

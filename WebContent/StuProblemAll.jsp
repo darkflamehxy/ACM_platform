@@ -26,12 +26,7 @@
 								<th>题目编号</th>
 								<th>题目名</th>
 								<th>描述</th>
-								<th>输入</th>
-								<th>输出</th>
-								<th>样例输入</th>
-								<th>样例输出</th>
 								<th>难度</th>
-								<th>答案</th>
 								<th>知识点</th>
 								<th>做题</th>
 								<th></th>
@@ -43,15 +38,10 @@
 									<td><s:property value="#p.id" /></td>
 									<td><s:property value="#p.name" /></td>
 									<td><s:property value="#p.description" /></td>
-									<td><s:property value="#p.input" /></td>
-									<td><s:property value="#p.output" /></td>
-									<td><s:property value="#p.sampleInput" /></td>
-									<td><s:property value="#p.sampleOutput" /></td>
 									<td><s:property value="#p.level" /></td>
-									<td><s:property value="#p.answer" /></td>
 									<td>
 										<s:iterator var="k" value="#p.knowledge">
-											<s:property value="#k.name"/>  
+											<s:property value="#k.name"/>&nbsp;
 										</s:iterator>
 									</td>
 									<td><a href="${ctx}/problem_studetail.action?problem.id=<s:property value="#p.id"/>">题目链接</a></td>
